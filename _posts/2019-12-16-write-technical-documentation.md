@@ -42,7 +42,7 @@ tags:
 
 #### 技术博客
 
-- Github  + Github Page  + Jekyll | Sphinx
+- Github  + Github Page  + Jekyll/Sphinx
 - Github  + Read The Docs + Sphinx
 
 > 静态博客框架 hexo、Jekyll、Octopress、Hugo、Sphinx
