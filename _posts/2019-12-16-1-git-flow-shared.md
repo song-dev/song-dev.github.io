@@ -12,7 +12,7 @@ tags:
 ## 介绍
 git flow 是一种工作流，核心是分支策略和发布管理，作者 Vincent Driessen
 
-<img src="https://song-dev.github.io//img/in-post/post-git/gitflow.png" alt="gitflow" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-git/gitflow.png" alt="gitflow" style="zoom:60%;" />
 
 [https://nvie.com/posts/a-successful-git-branching-model/](https://nvie.com/posts/a-successful-git-branching-model/) <br>
 [http://www.ruanyifeng.com/blog/2015/12/git-workflow.html](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
@@ -23,7 +23,7 @@ git flow 是一种工作流，核心是分支策略和发布管理，作者 Vinc
 - master
 - develop
 
-<img src="https://song-dev.github.io//img/in-post/post-git/master-develop.png" alt="master-develop" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-git/master-develop.png" alt="master-develop" style="zoom:60%;" />
 
 origin/master是源代码反映生产就绪状态的主要分支 。
 
@@ -72,7 +72,7 @@ $ git branch -d feature/myfeature
 $ git push origin develop
 ```
 
-<img src="https://song-dev.github.io//img/in-post/post-git/gitflow-merge.png" alt="master-develop" style="zoom: 60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-git/gitflow-merge.png" alt="master-develop" style="zoom: 60%;" />
 
 该--no-ff标志使合并始终创建新的提交对象，即使可以使用快进执行合并。这样可以避免丢失有关功能分支历史存在的信息，并将所有一起添加功能的提交组合在一起。
 
@@ -135,7 +135,7 @@ $ git branch -d release/1.2
 
 hotfix 分支非常像release分支，因为也是准备新的生产版本。当必须立即解决生产版本重大问题时候，从对应Tag checkout 修补。
 
-<img src="https://song-dev.github.io//img/in-post/post-git/gitflow-hotfix.png" alt="gitflow-hotfix" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-git/gitflow-hotfix.png" alt="gitflow-hotfix" style="zoom:60%;" />
 
 > 重大分支版本需要预留hotfix维护
 
