@@ -13,7 +13,7 @@ tags:
 
 划分的区域有各自的用途，以及创建及销毁的时间。有些伴随虚拟机进程启动而一直存在，有些区域则依赖用户线程的启动和结束而建立和销毁。Java 虚拟机规范( SE7 )规定虚拟机运行时数据区域划分为，`程序计数器`，`虚拟机栈`，`native method 栈`，`方法区`，`堆`。
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-data-area" alt="jvm-runtime-data-area" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-data-area" alt="jvm-runtime-data-area" style="zoom:80%;" />
 
 ## 程序计数器
 
@@ -23,14 +23,14 @@ tags:
 - 程序计数器是所有区域唯一没有任何 OOM 的区域
 - 程序计数器的值为 当前线程内存空间的起始地址(基地址) + 记录字节码指令相对基地址偏移地址
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-program-counter-mind.png" alt="jvm-runtime-program-counter-mind" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-program-counter-mind.png" alt="jvm-runtime-program-counter-mind" style="zoom:40%;" />
 
 ## 虚拟机栈
 
 - 虚拟机栈是线程私有的，其生命周期和程序计数器一样，都和线程生命周期相同
 - 虚拟机栈描述是 java 方法执行的内存模型，存储`局部变量表`，`操作数栈`，`动态链接`，`方法出口`等信息。
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-program-counter.png" alt="jvm-program-counter" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-program-counter.png" alt="jvm-program-counter" style="zoom:100%;" />
 
 - 每个方法从调用到执行完成的过程，都对应着一个栈帧从虚拟机中入栈到出栈的过程
 - 局部变量表所需内存空间在编译期间完成分配，方法运行期间不会改变局部变量表大小。(静态语言特性)
@@ -38,7 +38,7 @@ tags:
 
 > 局部数组引用存放在栈，数组对象存放在堆中
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-stack-area.png" alt="jvm-runtime-stack-area" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-stack-area.png" alt="jvm-runtime-stack-area" style="zoom:40%;" />
 
 ### 本地方法栈
 
@@ -54,7 +54,7 @@ tags:
 - Hotspot 虚拟机中在堆中分配了线程私有的缓冲区，方便快速分配内存，快速回收内存
 - 如果堆中没有内存完成实例的分配，且堆无法扩展时，会抛出 OutOfMemoryError 异常
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-heap-area.png" alt="jvm-runtime-heap-area" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-heap-area.png" alt="jvm-runtime-heap-area" style="zoom:40%;" />
 
 ## 方法区
 
@@ -69,7 +69,7 @@ tags:
 
 > 虚拟机加载类信息包括类版本、字段、接口、方法等描述信息
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-method-area.png" alt="jvm-runtime-method-area" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-method-area.png" alt="jvm-runtime-method-area" style="zoom:40%;" />
 
 ### 运行时数据常量池
 
@@ -78,7 +78,7 @@ tags:
 - 运行时常量池具备动态性，并不要求编译期才产生，运行期间也可能将新的常量放入常量池中
 - 常量池属于方法区一部分，同样会受到方法区内存限制，当常量池中无法申请到内存抛出 OutOfMemoryError 异常
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-constant-pool.png" alt="jvm-runtime-constant-pool" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-constant-pool.png" alt="jvm-runtime-constant-pool" style="zoom:50%;" />
 
 ## 直接内存
 
@@ -96,4 +96,4 @@ tags:
 
 ## 总结
 
-<img src="https://song-dev.github.io/img/in-post/post-git/jvm-runtime-data-area-summarize.png" alt="jvm-runtime-data-area-summarize" style="zoom:60%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-runtime-data-area-summarize.png" alt="jvm-runtime-data-area-summarize" style="zoom:120%;" />
