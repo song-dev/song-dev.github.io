@@ -54,7 +54,7 @@ tags:
 
 - 那么，分配对象内存 = 把指针向 未使用内存 移动一段 与对象大小相等的距离
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-指针碰撞-分配内存空间.png" alt="jvm-指针碰撞-分配内存空间" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-指针碰撞-分配内存空间.png" alt="jvm-指针碰撞-分配内存空间" style="zoom:70%;" />
 
 ##### 方式2：空闲列表
 
@@ -113,7 +113,7 @@ tags:
 ### 1.3 总结
 下面用一张图总结 Java对象创建的过程
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象分配内存-总结.png" alt="jvm-对象分配内存-总结" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象分配内存-总结.png" alt="jvm-对象分配内存-总结" style="zoom:90%;" />
 
 ## 2. 对象内存布局
 
@@ -171,7 +171,7 @@ Hotspot 虚拟机中对象内存布局分为三部分
 
 ### 2.4 总结
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象内存布局-总结.png" alt="jvm-对象内存布局-总结" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象内存布局-总结.png" alt="jvm-对象内存布局-总结" style="zoom:100%;" />
 
 ## 3. 对象访问定位
 
@@ -182,7 +182,7 @@ Hotspot 虚拟机中对象内存布局分为三部分
 
 ### 3.1 通过句柄访问对象
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-通过句柄访问对象.png" alt="jvm-通过句柄访问对象" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-通过句柄访问对象.png" alt="jvm-通过句柄访问对象" style="zoom:70%;" />
 
 句柄池最大好处是 reference 中存储的是稳定的句柄地址，在 GC 时只会改变句柄池中实例数据指针，而 reference 本身不修改
 
@@ -194,7 +194,7 @@ Hotspot 虚拟机中对象内存布局分为三部分
 
 ### 3.3 说明
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象访问定位-总结.png" alt="jvm-对象访问定位-总结" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象访问定位-总结.png" alt="jvm-对象访问定位-总结" style="zoom:100%;" />
 
 ## 参考
 - [https://www.jianshu.com/p/1952061502d0](https://www.jianshu.com/p/1952061502d0)
