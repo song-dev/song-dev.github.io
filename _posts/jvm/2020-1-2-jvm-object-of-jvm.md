@@ -20,7 +20,7 @@ tags:
 
 当遇到关键字new指令时，Java对象创建过程便开始，整个过程如下：
 
-![java 对象创建过程.png](http://note.youdao.com/yws/res/11429/WEBRESOURCE5a213b1ea003fa06d8cac26da796ecdb)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-object-create-process.png" alt="jvm-object-create-process" style="zoom:80%;" />
 
 ### 1.2 过程步骤
 
@@ -43,18 +43,18 @@ tags:
 > Java堆内存 规整：已使用的内存在一边，未使用内存在另一边
 > Java堆内存 不规整：已使用的内存和未使用内存相互交错
 
-![内存是否规整示意图.png](http://note.youdao.com/yws/res/12057/WEBRESOURCEfda7e5745a256aad47ba28665615469c)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-heap-memory.png" alt="jvm-heap-memory" style="zoom:80%;" />
 
 ##### 方式1：指针碰撞
 
 - 假设Java堆内存绝对规整，内存分配将采用指针碰撞
 - 分配形式：已使用内存在一边，未使用内存在另一边，中间放一个作为分界点的指示器
 
-![指针碰撞正常状态.png](http://note.youdao.com/yws/res/12060/WEBRESOURCE644a78d19a58a993f6a7d1a5edd567db)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-指针碰撞-正常.png" alt="jvm-指针碰撞-正常" style="zoom:80%;" />
 
 - 那么，分配对象内存 = 把指针向 未使用内存 移动一段 与对象大小相等的距离
 
-![分配内存空间.png](http://note.youdao.com/yws/res/12064/WEBRESOURCE1a0c10ece9db8e5836dfade2119b488b)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-指针碰撞-分配内存空间.png" alt="jvm-指针碰撞-分配内存空间" style="zoom:80%;" />
 
 ##### 方式2：空闲列表
 
@@ -113,7 +113,7 @@ tags:
 ### 1.3 总结
 下面用一张图总结 Java对象创建的过程
 
-![对象创建过程总金.png](http://note.youdao.com/yws/res/12066/WEBRESOURCEaa72b438b320a0934d8e9fd0f4cf0bb8)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象分配内存-总结.png" alt="jvm-对象分配内存-总结" style="zoom:80%;" />
 
 ## 2. 对象内存布局
 
@@ -122,6 +122,8 @@ Hotspot 虚拟机中对象内存布局分为三部分
 - 对象头(Header)
 - 实例数据(Instance Data)
 - 对齐填充(Padding)
+
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象内存布局.png" alt="jvm-对象内存布局" style="zoom:80%;" />
 
 ### 2.1 对象头
 
@@ -167,6 +169,10 @@ Hotspot 虚拟机中对象内存布局分为三部分
 
 > 前提是虚拟机有对齐限制，如 Hotspot 有这限制
 
+### 2.4 总结
+
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象内存布局-总结.png" alt="jvm-对象内存布局-总结" style="zoom:80%;" />
+
 ## 3. 对象访问定位
 
 虚拟机规范并未规定怎样访问栈上的 reference 对象，只规定了一个指向对象的引用。具体访问方式虚拟机自由实现，目前主流访问方式有：
@@ -176,19 +182,19 @@ Hotspot 虚拟机中对象内存布局分为三部分
 
 ### 3.1 通过句柄访问对象
 
-![通过句柄访问对象.png](http://note.youdao.com/yws/res/11397/WEBRESOURCE15303176b9f289787fb6bec40da3dbdf)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-通过句柄访问对象.png" alt="jvm-通过句柄访问对象" style="zoom:80%;" />
 
 句柄池最大好处是 reference 中存储的是稳定的句柄地址，在 GC 时只会改变句柄池中实例数据指针，而 reference 本身不修改
 
 ### 3.2 通过直接指针对象访问数据
 
-![通过直接指针访问对象.png](http://note.youdao.com/yws/res/11400/WEBRESOURCE5b080beb9a97b45ba29e5f7ac469db4f)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-通过直接指针访问对象.png" alt="jvm-通过直接指针访问对象" style="zoom:80%;" />
 
 直接访问最大好处是速度快，节省一次指针定位时间开销。Hotspot 虚拟机使用直接指针访问对象
 
 ### 3.3 说明
 
-![对象访问总结.png](http://note.youdao.com/yws/res/12020/WEBRESOURCE7bbb83e0f5eb963fc8b8103b07d5c943)
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-对象访问定位-总结.png" alt="jvm-对象访问定位-总结" style="zoom:80%;" />
 
 ## 参考
 - [https://www.jianshu.com/p/1952061502d0](https://www.jianshu.com/p/1952061502d0)
