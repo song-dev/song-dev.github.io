@@ -190,7 +190,7 @@ tags:
 
 - 根据 两块区域特点 选择 对应的垃圾收集算法（即上面介绍的算法），具体细节请看下图
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-分代收集算法比较.png" alt="jvm-分代收集算法比较" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-分代收集算法比较.png" alt="jvm-分代收集算法比较" style="zoom:120%;" />
 
 ## 5.2 具体存储过程
 
@@ -231,4 +231,4 @@ From Survivor 和 To Survivor之间会经常互换角色。
 
 用一张图总结上述4个垃圾收集算法
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-垃圾回收算法总结.png" alt="jvm-垃圾回收算法总结" style="zoom:100%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-垃圾回收算法总结.png" alt="jvm-垃圾回收算法总结" style="zoom:120%;" />
