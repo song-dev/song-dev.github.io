@@ -66,3 +66,4 @@ ro.kernel.qemu
 - https://mp.weixin.qq.com/s/sl33d2pnyLMJ-fUY_DfBDw
 - https://github.com/Labmem003/anti-counterfeit-android
 - https://github.com/lamster2018/EasyProtector
+- https://github.com/happylishang/CacheEmulatorChecker
