@@ -120,7 +120,7 @@ Process finished with exit code 0
 
 - 堆 GC 流程图
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-gc流程图.png" alt="jvm-gc流程图" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-gc流程图.jpg" alt="jvm-gc流程图" style="zoom:70%;" />
 
 > 以 jdk 1.6 update 24 以上为准，空间分配担保失败开关永远为开
 
