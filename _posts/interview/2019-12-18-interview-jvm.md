@@ -1,13 +1,12 @@
 ---
 layout: post
-title: "Java 虚拟机"
-subtitle: ' Java 虚拟机相关面试题 '
+title: "虚拟机相关面试题"
+subtitle: ' JVM 相关知识 '
 author: "Song"
 header-style: text
 tags:
-  - jvm
+  - JVM
   - java
-  - 虚拟机
   - 面试题
 ---
 
