@@ -84,7 +84,7 @@ objB.name = objA；
 
 如下图：
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-可达性分析示意图.png" alt="jvm-可达性分析示意图" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-可达性分析示意图.png" alt="jvm-可达性分析示意图" style="zoom:85%;" />
 
 ##### b. 判断 对象是否可达 标准
 
@@ -94,7 +94,7 @@ objB.name = objA；
 
 没有任何引用链相连 = GC Root到对象不可达 = 对象不可用
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-可达性分析过程.png" alt="jvm-可达性分析过程" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-可达性分析过程.png" alt="jvm-可达性分析过程" style="zoom:85%;" />
 
 #### 特别注意
 
@@ -137,7 +137,7 @@ objB.name = objA；
 ### 1.3 总结
 3步骤 + 以下流程
 
-<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-判断对象死亡-总结.png" alt="jvm-判断对象死亡-总结" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-jvm/jvm-判断对象死亡-总结.png" alt="jvm-判断对象死亡-总结" style="zoom:120%;" />
 
 ## 2. 四种引用类型
 判断对象是否已死都和引用相关，jdk1.2 之前引用定义很传统：若 reference 类型的数据存储的数值代表另外一块起始地址，称这块内存代表一个引用。局限是无法表示引用的各种状态。
