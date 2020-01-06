@@ -17,7 +17,7 @@ tags:
 - 现在主流的垃圾收集器有 7 种
 - 我们会根据需求场景的不同，选择不同特点的垃圾收集器
 
-![垃圾收集器类别.png](https://upload-images.jianshu.io/upload_images/944365-4ff2b4ddab3474e0.png)
+<img src="https://upload-images.jianshu.io/upload_images/944365-4ff2b4ddab3474e0.png" alt="垃圾收集器类别.png" style="zoom:40%;" />
 
 ## 1. Serial收集器
 
