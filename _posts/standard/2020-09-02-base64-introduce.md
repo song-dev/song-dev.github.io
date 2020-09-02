@@ -38,7 +38,7 @@ Base 64 Encoding 的编码原理是将每三个字节（byte）转换为四个�
 
 6 bit一共有64种组合方式，也就是说该编码共需要使用至少64种字符（后面我们还会介绍一个特殊字符 =）。Base 64 Encoding使用了从 A 到 Z、a 到 z、0 到 9、以及 + 和 / 这些字符（即`[A-Za-z0-9+/]`）。
 
-<img src="https://song-dev.github.io/img/in-post/post-base64/base64_2.png" alt="jvm-object-create-process" style="zoom:80%;" />
+<img src="https://song-dev.github.io/img/in-post/post-base64/base64_2.jpg" alt="jvm-object-create-process" style="zoom:80%;" />
 
 假设我们有三个字节的数据，byte[] {1, 2, 3}，用二进制表示为：
 `00000001 | 00000010 | 00000011`
