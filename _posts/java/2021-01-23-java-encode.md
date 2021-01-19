@@ -64,13 +64,13 @@ tags:
 ### I/O 操作中存在的编码
 我们知道涉及到编码的地方一般都在字符到字节或者字节到字符的转换上，而需要这种转换的场景主要是在 I/O 的时候，这个 I/O 包括磁盘 I/O 和网络 I/O，关于网络 I/O 部分在后面将主要以 Web 应用为例介绍。下图是 Java 中处理 I/O 问题的接口：
 
-![inputstreamreader](/Users/chensongsong/Downloads/inputstreamreader.png)
+![inputstreamreader](https://song-dev.github.io/img/in-post/post-io/inputstreamreader.png)
 
 Reader 类是 Java 的 I/O 中读字符的父类，而 InputStream 类是读字节的父类，InputStreamReader 类就是关联字节到字符的桥梁，它负责在 I/O 过程中处理读取字节到字符的转换，而具体字节到字符的解码实现它由 StreamDecoder 去实现，在 StreamDecoder 解码过程中必须由用户指定 Charset 编码格式。值得注意的是如果你没有指定 Charset，将使用本地环境中的默认字符集，例如在中文环境中将使用 GBK 编码。
 
 写的情况也是类似，字符的父类是 Writer，字节的父类是 OutputStream，通过 OutputStreamWriter 转换字符到字节。如下图所示：
 
-![outputstreamwriter](/Users/chensongsong/Downloads/outputstreamwriter.png)
+![outputstreamwriter](https://song-dev.github.io/img/in-post/post-io/outputstreamwriter.png)
 
 同样 StreamEncoder 类负责将字符编码成字节，编码格式和默认编码规则与解码是一致的。
 
@@ -179,13 +179,13 @@ public static void encode() {
 
 ##### 图 1. Java 编码类图
 
-![charsets](/Users/chensongsong/Downloads/charsets.jpg)
+![charsets](https://song-dev.github.io/img/in-post/post-io/charsets.jpg)
 
 首先根据指定的 charsetName 通过 Charset.forName(charsetName) 设置 Charset 类，然后根据 Charset 创建 CharsetEncoder 对象，再调用 CharsetEncoder.encode 对字符串进行编码，不同的编码类型都会对应到一个类中，实际的编码过程是在这些类中完成的。下面是 String. getBytes(charsetName) 编码过程的时序图
 
 ##### 图 2.Java 编码时序图
 
-![java-encode](/Users/chensongsong/Downloads/java-encode.jpg)
+![java-encode](https://song-dev.github.io/img/in-post/post-io/java-encode.jpg)
 
 从上图可以看出根据 charsetName 找到 Charset 类，然后根据这个字符集编码生成 CharsetEncoder，这个类是所有字符编码的父类，针对不同的字符编码集在其子类中定义了如何实现编码，有了 CharsetEncoder 对象后就可以调用 encode 方法去实现编码了。这个是 String.getBytes 编码方法，其它的如 StreamEncoder 中也是类似的方式。下面看看不同的字符集是如何将前面的字符串编码成 byte 数组的？
 
@@ -195,7 +195,7 @@ public static void encode() {
 
 字符串”I am 君山”用 ISO-8859-1 编码，下面是编码结果：
 
-![iso-8859-1](/Users/chensongsong/Downloads/iso-8859-1.gif)
+![iso-8859-1](https://song-dev.github.io/img/in-post/post-io/iso-8859-1.gif)
 
 从上图看出 7 个 char 字符经过 ISO-8859-1 编码转变成 7 个 byte 数组，ISO-8859-1 是单字节编码，中文”君山”被转化成值是 3f 的 byte。3f 也就是”？”字符，所以经常会出现中文变成”？”很可能就是错误的使用了 ISO-8859-1 这个编码导致的。中文字符经过 ISO-8859-1 编码会丢失信息，通常我们称之为”黑洞”，它会把不认识的字符吸收掉。由于现在大部分基础的 Java 框架或系统默认的字符集编码都是 ISO-8859-1，所以很容易出现乱码问题，后面将会分析不同的乱码形式是怎么出现的。
 
@@ -203,7 +203,7 @@ public static void encode() {
 
 字符串”I am 君山”用 GB2312 编码，下面是编码结果：
 
-![gb2312](/Users/chensongsong/Downloads/gb2312.gif)
+![gb2312](https://song-dev.github.io/img/in-post/post-io/gb2312.gif)
 
 GB2312 对应的 Charset 是 sun.nio.cs.ext. EUC_CN 而对应的 CharsetDecoder 编码类是 sun.nio.cs.ext. DoubleByte，GB2312 字符集有一个 char 到 byte 的码表，不同的字符编码就是查这个码表找到与每个字符的对应的字节，然后拼装成 byte 数组。查表的规则如下：
 
@@ -232,7 +232,7 @@ if (bb > 0xff) {    // DoubleByte
 
 字符串”I am 君山”用 GBK 编码，下面是编码结果：
 
-![gbk](/Users/chensongsong/Downloads/gbk.gif)
+![gbk](https://song-dev.github.io/img/in-post/post-io/gbk.gif)
 
 你可能已经发现上图与 GB2312 编码的结果是一样的，没错 GBK 与 GB2312 编码结果是一样的，由此可以得出 GBK 编码是兼容 GB2312 编码的，它们的编码算法也是一样的。不同的是它们的码表长度不一样，GBK 包含的汉字字符更多。所以只要是经过 GB2312 编码的汉字都可以用 GBK 进行解码，反过来则不然。
 
@@ -240,7 +240,7 @@ if (bb > 0xff) {    // DoubleByte
 
 字符串”I am 君山”用 UTF-16 编码，下面是编码结果：
 
-![utf-16](/Users/chensongsong/Downloads/utf-16.gif)
+![utf-16](https://song-dev.github.io/img/in-post/post-io/utf-16.gif)
 
 用 UTF-16 编码将 char 数组放大了一倍，单字节范围内的字符，在高位补 0 变成两个字节，中文字符也变成两个字节。从 UTF-16 编码规则来看，仅仅将字符的高位和地位进行拆分变成两个字节。特点是编码效率非常高，规则很简单，由于不同处理器对 2 字节处理方式不同，Big-endian（高位字节在前，低位字节在后）或 Little-endian（低位字节在前，高位字节在后）编码，所以在对一串字符串进行编码是需要指明到底是 Big-endian 还是 Little-endian，所以前面有两个字节用来保存 BYTE_ORDER_MARK 值，UTF-16 是用定长 16 位（2 字节）来表示的 UCS-2 或 Unicode 转换格式，通过代理对来访问 BMP 之外的字符编码。
 
@@ -248,7 +248,7 @@ if (bb > 0xff) {    // DoubleByte
 
 字符串”I am 君山”用 UTF-8 编码，下面是编码结果：
 
-![utf-8](/Users/chensongsong/Downloads/utf-8.gif)
+![utf-8](https://song-dev.github.io/img/in-post/post-io/utf-8.gif)
 
 UTF-16 虽然编码效率很高，但是对单字节范围内字符也放大了一倍，这无形也浪费了存储空间，另外 UTF-16 采用顺序编码，不能对单个字符的编码值进行校验，如果中间的一个字符码值损坏，后面的所有码值都将受影响。而 UTF-8 这些问题都不存在，UTF-8 对单字节范围内字符仍然用一个字节表示，对汉字采用三个字节表示。它的编码规则如下：
 
@@ -329,7 +329,7 @@ UTF-8 编码与 GBK 和 GB2312 不同，不用查码表，所以在编码效率�
 
 ##### 图 3. 一次 HTTP 请求的编码示例
 
-![http](/Users/chensongsong/Downloads/http.gif)
+![http](https://song-dev.github.io/img/in-post/post-io/http.gif)
 
 如上图所示一次 HTTP 请求设计到很多地方需要编解码，它们编解码的规则是什么？下面将会重点阐述一下：
 
@@ -339,7 +339,7 @@ UTF-8 编码与 GBK 和 GB2312 不同，不用查码表，所以在编码效率�
 
 ##### 图 4.URL 的几个组成部分
 
-![url](/Users/chensongsong/Downloads/url.gif)
+![url](https://song-dev.github.io/img/in-post/post-io/url.gif)
 
 上图中以 Tomcat 作为 Servlet Engine 为例，它们分别对应到下面这些配置文件中：
 
@@ -358,7 +358,7 @@ Port 对应在 Tomcat 的 中配置，而 Context Path 在 中配置，Servlet P
 
 ##### 图 5. HTTPFox 的测试结果
 
-![httpfox](/Users/chensongsong/Downloads/httpfox.jpg)
+![httpfox](https://song-dev.github.io/img/in-post/post-io/httpfox.jpg)
 
 君山的编码结果分别是：e5 90 9b e5 b1 b1，be fd c9 bd，查阅上一届的编码可知，PathInfo 是 UTF-8 编码而 QueryString 是经过 GBK 编码，至于为什么会有”%”？查阅 URL 的编码规范 RFC3986 可知浏览器编码 URL 是将非 ASCII 字符按照某种编码格式编码成 16 进制数字然后将每个 16 进制表示的字节前加上”%”，所以最终的 URL 就成了上图的格式了。
 
@@ -461,7 +461,7 @@ JSP 设置编码格式：
 
 例如，字符串”淘！我喜欢！”变成了”Ì Ô £ ¡Î Ò Ï²»¶ £ ¡”编码过程如下图所示
 
-![chinese-bug](/Users/chensongsong/Downloads/chinese-bug.gif)
+![chinese-bug](https://song-dev.github.io/img/in-post/post-io/chinese-bug.gif)
 
 字符串在解码时所用的字符集与编码字符集不一致导致汉字变成了看不懂的乱码，而且是一个汉字字符变成两个乱码字符。
 
@@ -469,7 +469,7 @@ JSP 设置编码格式：
 
 例如，字符串”淘！我喜欢！”变成了”？？？？？？”编码过程如下图所示
 
-![chinese-bug2](/Users/chensongsong/Downloads/chinese-bug2.gif)
+![chinese-bug2](https://song-dev.github.io/img/in-post/post-io/chinese-bug2.gif)
 
 将中文和中文符号经过不支持中文的 ISO-8859-1 编码后，所有字符变成了”？”，这是因为用 ISO-8859-1 进行编解码时遇到不在码值范围内的字符时统一用 3f 表示，这也就是通常所说的”黑洞”，所有 ISO-8859-1 不认识的字符都变成了”？”。
 
@@ -477,7 +477,7 @@ JSP 设置编码格式：
 
 例如，字符串”淘！我喜欢！”变成了”？？？？？？？？？？？？”编码过程如下图所示
 
-![chinese-bug3](/Users/chensongsong/Downloads/chinese-bug3.gif)
+![chinese-bug3](https://song-dev.github.io/img/in-post/post-io/chinese-bug3.gif)
 
 这种情况比较复杂，中文经过多次编码，但是其中有一次编码或者解码不对仍然会出现中文字符变成”？”现象，出现这种情况要仔细查看中间的编码环节，找出出现编码错误的地方。
 
@@ -500,7 +500,7 @@ String value = String(request.getParameter(name).getBytes("
 
 看下如所示：
 
-![chinese-success](/Users/chensongsong/Downloads/chinese-success.gif)
+![chinese-success](https://song-dev.github.io/img/in-post/post-io/chinese-success.gif)
 
 这种情况是这样的，ISO-8859-1 字符集的编码范围是 0000-00FF，正好和一个字节的编码范围相对应。这种特性保证了使用 ISO-8859-1 进行编码和解码可以保持编码数值”不变”。虽然中文字符在经过网络传输时，被错误地”拆”成了两个欧洲字符，但由于输出时也是用 ISO-8859-1，结果被”拆”开的中文字的两半又被合并在一起，从而又刚好组成了一个正确的汉字。虽然最终能取得正确的汉字，但是还是不建议用这种不正常的方式取得参数值，因为这中间增加了一次额外的编码与解码，这种情况出现乱码时因为 Tomcat 的配置文件中 useBodyEncodingForURI 配置项没有设置为”true”，从而造成第一次解析式用 ISO-8859-1 来解析才造成乱码的。
 
