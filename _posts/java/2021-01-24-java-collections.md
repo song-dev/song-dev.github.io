@@ -134,7 +134,7 @@ Set是一种不包括重复元素的Collection。它维持它自己的内部排�
 
 为了更好地理解，请看下面的例子：
 
-```
+```java
 public class Test{ 
 public static void main(String[] args) { 
      Set<String> set=new HashSet<String>(); 
@@ -156,7 +156,7 @@ public static void main(String[] args) {
 
 再看一个例子：
 
-```
+```java
 public class TestSet {
 
     public static void main(String[] args){
