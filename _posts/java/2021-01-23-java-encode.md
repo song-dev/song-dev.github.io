@@ -78,7 +78,7 @@ Reader 类是 Java 的 I/O 中读字符的父类，而 InputStream 类是读字�
 
 ##### 清单 1.I/O 涉及的编码示例
 
-```
+```java
 String file = "c:/stream.txt";
  String charset = "UTF-8";
  // 写字符换转成字节流
@@ -112,7 +112,7 @@ String file = "c:/stream.txt";
 
 在 Java 开发中除了 I/O 涉及到编码外，最常用的应该就是在内存中进行字符到字节的数据类型的转换，Java 中用 String 表示字符串，所以 String 类就提供转换到字节的方法，也支持将字节转换为字符串的构造函数。如下代码示例：
 
-```
+```java
 String s = "这是一段中文字符串";
 byte[] b = s.getBytes("UTF-8");
 String n = new String(b,"UTF-8");
@@ -120,7 +120,7 @@ String n = new String(b,"UTF-8");
 
 另外一个是已经被被废弃的 ByteToCharConverter 和 CharToByteConverter 类，它们分别提供了 convertAll 方法可以实现 byte[] 和 char[] 的互转。如下代码所示：
 
-```
+```java
 ByteToCharConverter charConverter = ByteToCharConverter.getConverter("UTF-8");
 char c[] = charConverter.convertAll(byteArray);
 CharToByteConverter byteConverter = CharToByteConverter.getConverter("UTF-8");
@@ -129,7 +129,7 @@ byte[] b = byteConverter.convertAll(c);
 
 这两个类已经被 Charset 类取代，Charset 提供 encode 与 decode 分别对应 char[] 到 byte[] 的编码和 byte[] 到 char[] 的解码。如下代码所示：
 
-```
+```java
 Charset charset = Charset.forName("UTF-8");
 ByteBuffer byteBuffer = charset.encode(string);
 CharBuffer charBuffer = charset.decode(byteBuffer);
@@ -139,7 +139,7 @@ CharBuffer charBuffer = charset.decode(byteBuffer);
 
 Java 中还有一个 ByteBuffer 类，它提供一种 char 和 byte 之间的软转换，它们之间转换不需要编码与解码，只是把一个 16bit 的 char 格式，拆分成为 2 个 8bit 的 byte 表示，它们的实际值并没有被修改，仅仅是数据的类型做了转换。如下代码所以：
 
-```
+```java
 ByteBuffer heapByteBuffer = ByteBuffer.allocate(1024);
 ByteBuffer byteBuffer = heapByteBuffer.putChar(c);
 ```
@@ -152,7 +152,7 @@ ByteBuffer byteBuffer = heapByteBuffer.putChar(c);
 
 ##### 清单 2.String 编码
 
-```
+```java
 public static void encode() {
         String name = "I am 君山";
         toHex(name.toCharArray());
@@ -213,7 +213,7 @@ c2b[c2bIndex[char >> 8] + (char & 0xff)]
 
 如果查到的码位值大于 oxff 则是双字节，否则是单字节。双字节高 8 位作为第一个字节，低 8 位作为第二个字节，如下代码所示：
 
-```
+```java
 if (bb > 0xff) {    // DoubleByte
             if (dl - dp < 2)
                 return CoderResult.OVERFLOW;
@@ -252,7 +252,7 @@ if (bb > 0xff) {    // DoubleByte
 
 UTF-16 虽然编码效率很高，但是对单字节范围内字符也放大了一倍，这无形也浪费了存储空间，另外 UTF-16 采用顺序编码，不能对单个字符的编码值进行校验，如果中间的一个字符码值损坏，后面的所有码值都将受影响。而 UTF-8 这些问题都不存在，UTF-8 对单字节范围内字符仍然用一个字节表示，对汉字采用三个字节表示。它的编码规则如下：
 
-```
+```java
 private CoderResult encodeArrayLoop(CharBuffer src,
  ByteBuffer dst){
             char[] sa = src.array();
@@ -345,7 +345,7 @@ UTF-8 编码与 GBK 和 GB2312 不同，不用查码表，所以在编码效率�
 
 Port 对应在 Tomcat 的 中配置，而 Context Path 在 中配置，Servlet Path 在 Web 应用的 web.xml 中的
 
-```
+```xml
 <servlet-mapping>
         <servlet-name>junshanExample</servlet-name>
         <url-pattern>/servlets/servlet/*</url-pattern>
@@ -368,7 +368,7 @@ Port 对应在 Tomcat 的 中配置，而 Context Path 在 中配置，Servlet P
 
 解析请求的 URL 是在 org.apache.coyote.HTTP11.InternalInputBuffer 的 parseRequestLine 方法中，这个方法把传过来的 URL 的 byte[] 设置到 org.apache.coyote.Request 的相应的属性中。这里的 URL 仍然是 byte 格式，转成 char 是在 org.apache.catalina.connector.CoyoteAdapter 的 convertURI 方法中完成的：
 
-```
+```java
 protected void convertURI(MessageBytes uri, Request request)
  throws Exception {
         ByteChunk bc = uri.getByteChunk();
@@ -435,7 +435,7 @@ QueryString 又如何解析？ GET 方式 HTTP 请求的 QueryString 与 POST �
 
 xml 文件可以通过设置头来制定编码格式
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 ```
 
@@ -447,7 +447,7 @@ services.VelocityService.input.encoding=UTF-8
 
 JSP 设置编码格式：
 
-```
+```xml
 <%@page contentType="text/html; charset=UTF-8"%>
 ```
 
@@ -485,13 +485,13 @@ JSP 设置编码格式：
 
 还有一种情况是在我们通过 request.getParameter 获取参数值时，当我们直接调用
 
-```
+```java
 String value = request.getParameter(name);
 ```
 
 会出现乱码，但是如果用下面的方式
 
-```
+```java
 String value = String(request.getParameter(name).getBytes("
  ISO-8859-1"), "GBK");
 ```
